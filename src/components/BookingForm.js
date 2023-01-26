@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function BookingForm() {
+function BookingForm({ availableTime, dispatch }) {
   let [formState, setFormState] = useState({
     date: "",
     time: "17:00",
@@ -8,13 +8,13 @@ function BookingForm() {
     occasion: "Birthday"
   })
 
-  const [availableTime] = useState(["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]);
-
   const handleChange = (e, type) => {
     setFormState({
       ...formState,
       [type]: e.target.value
     })
+
+    dispatch({ type: "anything" })
   }
 
   const handleSubmit = (e) => {
