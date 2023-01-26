@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function BookingForm({ availableTime, dispatch }) {
+function BookingForm({ availableTime, dispatch, onSubmit }) {
   let [formState, setFormState] = useState({
     date: "",
     time: "17:00",
@@ -14,22 +14,23 @@ function BookingForm({ availableTime, dispatch }) {
       [type]: e.target.value
     })
 
-    dispatch({ type: "anything" })
+    // dispatch({ type: "anything" })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formState)
+    onSubmit(formState);
   }
 
   return (
     <section className='booking-section'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="form">
+        <h1>Book Now</h1>
         <label htmlFor="res-date">Choose date</label>
-        <input type="date" id="res-date" value={formState.date} onChange={(e) => { handleChange(e, "date") }} />
+        <input type="date" id="res-date" data-testid="date" value={formState.date} onChange={(e) => { handleChange(e, "date") }} />
         <label htmlFor="res-time">Choose time</label>
-        <select id="res-time " value={formState.time} onChange={(e) => { handleChange(e, "time") }}>
-          {availableTime.map((time, i) => <option key={i}>{time}</option>)}
+        <select id="res-time" data-testid="select" value={formState.time} onChange={(e) => { handleChange(e, "time") }}>
+          {availableTime.map((time, i) => <option data-testid="select-option" key={i}>{time}</option>)}
         </select>
         <label htmlFor="guests">Number of guests</label>
         <input type="number" placeholder="1" min="1" max="10" id="guests" value={formState.numberOfGuest} onChange={(e) => { handleChange(e, "numberOfGuest") }} />
@@ -38,7 +39,7 @@ function BookingForm({ availableTime, dispatch }) {
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
-        <input type="submit" value="Make Your reservation" />
+        <input type="submit" value="Make Your reservation" data-testid="submit-button" />
       </form>
     </section>
   )

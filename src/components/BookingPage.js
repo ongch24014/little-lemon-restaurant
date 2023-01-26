@@ -9,9 +9,13 @@ function BookingPage() {
   }
   const [availableTime, dispatch] = useReducer(updateTimes, initializeTimes);
 
+  const handleSubmit = (e) => {
+    console.log(e);
+  };
+
   return (
     <section>
-      <BookingForm availableTime={availableTime} dispatch={dispatch} />
+      <BookingForm availableTime={availableTime} dispatch={dispatch} onSubmit={handleSubmit} />
     </section>
   )
 }
