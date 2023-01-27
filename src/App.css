@@ -293,3 +293,18 @@ footer ul a {
   max-width: 200px;
   gap: 20px;
 }
+
+.booking-section > form > label {
+  font-size: medium;
+  font-weight: 600;
+}
+
+.booking-section > form > input:not([type="submit"]), .booking-section > form > select {
+  border: 1px solid #7f7f7f;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.booking-section > form > input[type="submit"] {
+  padding: 10px;
+}
