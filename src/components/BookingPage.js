@@ -26,9 +26,7 @@ function BookingPage() {
   }
 
   return (
-    <section>
-      <BookingForm availableTime={availableTime} dispatch={dispatch} onSubmit={useHandleSubmit} />
-    </section>
+    <BookingForm availableTime={availableTime} dispatch={dispatch} onSubmit={useHandleSubmit} />
   )
 }
 

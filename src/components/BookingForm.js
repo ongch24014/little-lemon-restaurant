@@ -46,7 +46,7 @@ function BookingForm({ availableTime, dispatch, onSubmit }) {
         </select>
         <label htmlFor="guests">Number of guests</label>
         <input type="number" placeholder="1" min="0" max="10" id="guests" data-testid="guests" value={formState.numberOfGuest} onChange={(e) => { handleChange(e, "numberOfGuest") }} />
-        {formState.numberOfGuest < 1 && <span>Number of guests must be more than 0.</span>}
+        {formState.numberOfGuest < 1 && <span className='err-msg'>Number of guests must be more than 0.</span>}
         <label htmlFor="occasion">Occasion</label>
         <select id="occasion" value={formState.occasion} onChange={(e) => { handleChange(e, "occasion") }}>
           <option>Birthday</option>
