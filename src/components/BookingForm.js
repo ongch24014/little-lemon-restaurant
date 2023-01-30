@@ -11,8 +11,6 @@ function BookingForm({ availableTime, dispatch, onSubmit }) {
     occasion: "Birthday"
   })
 
-  console.log(formState)
-
   const handleChange = (e, type) => {
     setFormState({
       ...formState,
@@ -29,6 +27,13 @@ function BookingForm({ availableTime, dispatch, onSubmit }) {
     onSubmit(formState);
   }
 
+  function getIsFormValid() {
+    if (formState.numberOfGuest < 1) {
+      return false;
+    }
+    return true
+  }
+
   return (
     <section className='booking-section'>
       <form onSubmit={handleSubmit} data-testid="form">
@@ -40,13 +45,14 @@ function BookingForm({ availableTime, dispatch, onSubmit }) {
           {availableTime.map((time, i) => <option data-testid="select-option" key={i}>{time}</option>)}
         </select>
         <label htmlFor="guests">Number of guests</label>
-        <input type="number" placeholder="1" min="1" max="10" id="guests" value={formState.numberOfGuest} onChange={(e) => { handleChange(e, "numberOfGuest") }} />
+        <input type="number" placeholder="1" min="0" max="10" id="guests" data-testid="guests" value={formState.numberOfGuest} onChange={(e) => { handleChange(e, "numberOfGuest") }} />
+        {formState.numberOfGuest < 1 && <span>Number of guests must be more than 0.</span>}
         <label htmlFor="occasion">Occasion</label>
         <select id="occasion" value={formState.occasion} onChange={(e) => { handleChange(e, "occasion") }}>
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
-        <input type="submit" value="Make Your reservation" data-testid="submit-button" />
+        <input type="submit" value="Make Your reservation" data-testid="submit-button" disabled={!getIsFormValid()} />
       </form>
     </section>
   )

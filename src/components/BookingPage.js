@@ -1,6 +1,7 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { fetchAPI, submitAPI } from '../api';
 import BookingForm from './BookingForm';
+import { useNavigate } from "react-router-dom";
 
 function BookingPage() {
   let initializeTimes = fetchAPI(new Date(Date.now()))
@@ -15,14 +16,18 @@ function BookingPage() {
 
   const [availableTime, dispatch] = useReducer(updateTimes, initializeTimes);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  function useHandleSubmit(e) {
     const result = submitAPI(e);
-    console.log(result);
-  };
+    if (result == true) {
+      navigate("/bookingConfirmed");
+    }
+  }
 
   return (
     <section>
-      <BookingForm availableTime={availableTime} dispatch={dispatch} onSubmit={handleSubmit} />
+      <BookingForm availableTime={availableTime} dispatch={dispatch} onSubmit={useHandleSubmit} />
     </section>
   )
 }

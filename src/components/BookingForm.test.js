@@ -36,3 +36,14 @@ test('User is able to submit form', () => {
     occasion: "Birthday"
   });
 })
+
+test('User selects 0 guests, submit button should be disabled', () => {
+  let availableTime = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  const onSubmit = jest.fn();
+
+  render(<BookingForm availableTime={availableTime} onSubmit={onSubmit} />);
+  const guestsElement = screen.getByTestId("guests");
+  fireEvent.change(guestsElement, { target: { value: 0 } });
+  const submitButton = screen.getByTestId("submit-button");
+  expect(submitButton).toBeDisabled();
+})
