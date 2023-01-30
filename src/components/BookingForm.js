@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 
 function BookingForm({ availableTime, dispatch, onSubmit }) {
+  const date = new Date();
+  const currentMonth = date.getMonth() + 1;
+  const today = `${date.getFullYear()}-${currentMonth / 10 > 1 ? currentMonth : "0" + currentMonth}-${date.getDate()}`;
   let [formState, setFormState] = useState({
-    date: "",
+    date: today,
     time: "17:00",
     numberOfGuest: 1,
     occasion: "Birthday"
   })
+
+  console.log(formState)
 
   const handleChange = (e, type) => {
     setFormState({
@@ -14,7 +19,9 @@ function BookingForm({ availableTime, dispatch, onSubmit }) {
       [type]: e.target.value
     })
 
-    // dispatch({ type: "anything" })
+    if (dispatch) {
+      dispatch({ type, date: e.target.value })
+    }
   }
 
   const handleSubmit = (e) => {
