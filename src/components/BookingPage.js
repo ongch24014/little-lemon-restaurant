@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { fetchAPI, submitAPI } from '../api';
 import BookingForm from './BookingForm';
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ function BookingPage() {
   let initializeTimes = fetchAPI(new Date(Date.now()))
 
   const updateTimes = (state, action) => {
-    if (action.type == "date") {
+    if (action.type === "date") {
       const newDate = fetchAPI(new Date(action.date))
       state = newDate;
     }
@@ -20,7 +20,7 @@ function BookingPage() {
 
   function useHandleSubmit(e) {
     const result = submitAPI(e);
-    if (result == true) {
+    if (result === true) {
       navigate("/bookingConfirmed");
     }
   }
